@@ -1,103 +1,136 @@
 import Image from "next/image";
+import { Search, Menu, Mic, Video, Bell, User, Play, Plus } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // Dummy video data
+  const tracks = Array(20).fill(null).map((_, i) => ({
+    id: i,
+    title: `Amazing Track ${i + 1}`,
+    artist: `Artist ${i + 1}`,
+    album: `Album ${i + 1}`,
+    duration: `${Math.floor(Math.random() * 10)}:${Math.floor(Math.random() * 60)}`,
+    cover: `https://picsum.photos/seed/${i}/320/180`,
+  }));
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  return (
+    <div className="min-h-screen bg-white dark:bg-[#0f0f0f]">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 h-14 bg-white dark:bg-[#0f0f0f] border-b border-gray-200 dark:border-gray-800 flex items-center px-4 z-50">
+        <div className="flex items-center gap-4 w-full">
+          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="flex items-center gap-2">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
+              src="/youtube-logo.png"
+              alt="YouTube"
+              width={90}
               height={20}
+              className="dark:invert"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+          <div className="flex-1 max-w-2xl mx-4">
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-l-full focus:outline-none focus:border-blue-500 dark:bg-[#121212]"
+              />
+              <button className="px-6 py-2 bg-gray-100 dark:bg-gray-800 border border-l-0 border-gray-300 dark:border-gray-700 rounded-r-full">
+                <Search className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+            <Mic className="w-6 h-6" />
+          </button>
+          <div className="flex items-center gap-2">
+            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+              <Video className="w-6 h-6" />
+            </button>
+            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+              <Bell className="w-6 h-6" />
+            </button>
+            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+              <User className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Sidebar */}
+      <aside className="fixed left-0 top-14 bottom-0 w-64 bg-white dark:bg-[#0f0f0f] border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
+        <nav className="p-4">
+          <div className="space-y-2">
+            <a href="#" className="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+              <div className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+              <span>Home</span>
+            </a>
+            <a href="#" className="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+              <div className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+              <span>Shorts</span>
+            </a>
+            <a href="#" className="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+              <div className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+              <span>Subscriptions</span>
+            </a>
+          </div>
+          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="px-2 text-sm font-medium text-gray-500 dark:text-gray-400">Library</h3>
+            <div className="mt-2 space-y-2">
+              <a href="#" className="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+                <div className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                <span>History</span>
+              </a>
+              <a href="#" className="flex items-center gap-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+                <div className="w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                <span>Watch later</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="ml-64 pt-14 p-6">
+        <div className="tracks grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+          {tracks.map((track) => (
+            <div key={track.id} className="track flex flex-row w-full items-center bg-white/80 dark:bg-[#181818] border border-gray-200 dark:border-gray-800 rounded-lg px-3 py-2 hover:bg-gray-50 dark:hover:bg-[#232323] transition-colors">
+              {/* Left group */}
+              <div className="flex flex-row items-center gap-3">
+                <div className="w-9 h-9 aspect-square bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden flex-shrink-0">
+                  <Image
+                    src={track.cover}
+                    alt={track.title}
+                    width={36}
+                    height={36}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <button className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-1">
+                  <Play className="w-6 h-6" />
+                </button>
+                <div className="flex flex-col gap-0.5">
+                  <h3 className="font-medium leading-tight">{track.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-tight">
+                    {track.artist}
+                  </p>
+                </div>
+              </div>
+              {/* Right group */}
+              <div className="flex flex-row items-center gap-3 ml-auto">
+                <button className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full p-1">
+                  <Plus className="w-6 h-6" />
+                </button>
+                <div className="flex flex-col gap-0.5 items-end min-w-[60px]">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-tight">{track.duration}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-tight">{track.album}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
